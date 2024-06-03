@@ -71,6 +71,12 @@ const [msg, setMsg] = useState('');  // msg - поисковый запрос д
   setSearchInput(event.target.value);
 };
 
+
+const AddPosts = () => {
+  window.open('newposts.js', 'Data', 'height=250, width=250');
+};
+
+
 const handleKeyDown = (event) => {
   if (event.key === 'Enter') {
     setMsg(searchInput);
@@ -122,9 +128,12 @@ const handleKeyDown = (event) => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+          
+
+          <Button variant = "contained" onClick={AddPosts()}>Добавить запись</Button>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          </Box>
+          mu</Box>
           
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
