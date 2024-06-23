@@ -123,13 +123,31 @@ function HeaderAuth() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Router>
-            <div>
+          
+            {/* <div>
               <Link to="/registration/">
                 Добавить запись
               </Link>
+            </div> */}
+
+            <div>
+            <button onClick={()=>window.location.href = 'http://127.0.0.1:8000/docs#/'}>Go to naiuh</button>
             </div>
-          </Router>
+
+            <div>
+            <button onClick={
+              ()=>fetch('http://localhost:8000/api/v1/products/', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({name: 'da lan', description: 'Rabotaet ?', price: '999'})
+              })
+              .then(res => res.json())
+              .then(data => console.log('Успешно:', data))
+              .catch(error => console.error('Ошибка:', error))
+            }>POST naiuh</button>
+            </div>
+          
+
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           </Box>
