@@ -1,80 +1,105 @@
 import React from 'react';
+import { useRef, Component } from 'react'
 import "./newposts.css"
 import {TextField, Typography, Radio, RadioGroup, FormControl, FormControlLabel, 
 FormLabel, Button, Stack} from "@mui/material";
 import { MuiFileInput } from 'mui-file-input';
+import { useState } from "react";
 
 const NewPosts = () => {
-  const [file, setFile] = React.useState(null)
+  // const [file, setFile] = React.useState(null)
+  const [name1, setName1] = useState("");
+  const [name2, setName2] = useState("");
+  const [name3, setName3] = useState("");
 
-  const handleChange = (newFile) => {
-    setFile(newFile)
+  // const handleChange = (newFile) => {
+  //   setFile(newFile)
+  // }
+
+  const ohmlya = () => {
+    return console.log(name1+name2+name3)
   }
 
+  const eba1 = () => {
+    return console.log(valueRef1.current.value) //on clicking button accesing current value of TextField and outputing it to console 
+}
+const eba2 = () => {
+  return console.log(valueRef2.current.value)
+}
+const eba3 = () => {
+  return console.log(valueRef3.current.value)
+}
+
+  const valueRef1 = useRef('');
+  const valueRef2 = useRef('');
+  const valueRef3 = useRef('');
+  // var params = new FormData(); 
+  // params.set('name', {eba1});
+  // params.set('description', {eba2});
+  // params.set('price', {eba3});
   return (
+    
     <div className='container'>
-            <Typography variant="h2" fontFamily='Poppins' textAlign='center'>Регистрация</Typography>
-            <Typography variant="body1" marginBottom={3} fontFamily='Poppins' textAlign='center'>Введите данные для регистрации</Typography>
+            <Typography variant="h2" fontFamily='Poppins' textAlign='center'>Создать новую запись</Typography>
             <TextField
+            inputRef={valueRef1}
                 fullWidth={true}
+                value={name1}
                 margin='normal'
-                label="Имя"
+                label="Название"
                 variant="outlined"
-                placeholder="Введите ваше имя"
+                placeholder="Введите название"
+                onChange={(e) => {
+                  setName1(e.target.value);
+              }}
             />
             <TextField
+            inputRef={valueRef2}
                 fullWidth={true}
+                value={name2}
                 margin='normal'
-                label="Username"
+                label="Описание"
                 variant="outlined"
-                placeholder="Введите ваш username"
+                placeholder="Введите описание"
+                onChange={(e) => {
+                  setName2(e.target.value);
+              }}
             />
             <TextField
+            inputRef={valueRef3}
                 fullWidth={true}
+                value={name3}
                 margin='normal'
-                label="Email"
+                label="Price"
                 variant="outlined"
-                placeholder="Введите ваш email"
+                placeholder="Введите price"
+                onChange={(e) => {
+                  setName3(e.target.value);
+              }}
             />
-            <TextField
-                type="password"
-                fullWidth={true}
-                margin='normal'
-                label="Password"
-                variant="outlined"
-                placeholder="Введите ваш пароль"
-            />
-            <TextField
-                type="password"
-                fullWidth={true}
-                margin='normal'
-                label="Password"
-                variant="outlined"
-                placeholder="Повторите ваш пароль"
-            />
-            <MuiFileInput 
-             fullWidth={true}
-             margin='normal'
-            value={file} 
-            label="Добавьте фото"
-            onChange={handleChange} />
-            <FormControl>
-             <FormLabel id="demo-radio-buttons-group-label">Укажите пол</FormLabel>
-             <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              name="radio-buttons-group" >
-            <FormControlLabel 
-            value="female" 
-            control={<Radio />} 
-            label="Женский" />
-            <FormControlLabel 
-            value="male" 
-            control={<Radio />} label="Мужской" />
-            </RadioGroup>
-           </FormControl>
            <Stack spacing={2} direction="row" justifyContent={"flex-end"} >
-             <Button variant="contained">Регистрация</Button>
+             <Button variant="contained"
+             onClick={
+              ()=>fetch('http://localhost:8000/api/v1/products/', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({name: name1, description: name2, price: name3})
+              })
+              .then(res => res.json())
+              .then(data => console.log('Успешно:', data))
+              .catch(error => console.error('Ошибка:', error))
+            }
+             >Добавить</Button>
+             
+             <Button
+            variant='contained'
+            color='primary'
+            size='small'
+            onClick={ohmlya}
+            >
+            Send
+            </Button>
+
           </Stack>
     </div>
   );

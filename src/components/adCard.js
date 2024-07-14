@@ -7,7 +7,7 @@ import { Button, CardActionArea, CardActions, Dialog, DialogActions,  DialogCont
   DialogContentText, DialogTitle, TextField} from '@mui/material';
 import "./regform.css"
 
-export default function AdCard({imgLink,adTitle,adText,post_id}) {
+export default function AdCard({imgLink,adTitle,adText,adId,post_id}) {
   const [open, setOpen] = React.useState(false);
 const [showCom,setShowCom] = React.useState([]);
 
@@ -36,6 +36,7 @@ const [showCom,setShowCom] = React.useState([]);
 
   const comms = showCom.map((comms) => <p>{comms.id}. {comms.text}</p>)
 
+
   return (
     
     <Card sx={{ maxWidth: 500, minWidth: 500, minHeight:300 }}>
@@ -52,6 +53,9 @@ const [showCom,setShowCom] = React.useState([]);
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {adText}
+          </Typography>
+          <Typography variant="body2" color="InfoText">
+            Id {adId}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -86,6 +90,17 @@ const [showCom,setShowCom] = React.useState([]);
           </Button>
         </DialogActions>
       </Dialog>
+      <Button size="small" color="primary" onClick={
+        ()=>fetch(`http://localhost:8000/api/v1/products/${adId}/del`, {
+          method: 'DELETE',
+          headers: {'Content-Type': 'application/json'},
+          
+        })
+        .then(()=>window.location.reload())
+        .then(res => res.json())
+        .then(data => console.log('Успешно:', data))
+        .catch(error => console.error('Ошибка:', error))
+      }>Удалить</Button>
       </CardActions>
     </Card>
     
