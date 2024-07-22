@@ -5,7 +5,7 @@ import {TextField, Typography, Radio, RadioGroup, FormControl, FormControlLabel,
 FormLabel, Button, Stack} from "@mui/material";
 import { MuiFileInput } from 'mui-file-input';
 import { useState } from "react";
-
+import {Link} from "react-router-dom";
 const NewPosts = () => {
   // const [file, setFile] = React.useState(null)
   const [name1, setName1] = useState("");
@@ -15,10 +15,6 @@ const NewPosts = () => {
   // const handleChange = (newFile) => {
   //   setFile(newFile)
   // }
-
-  const ohmlya = () => {
-    return console.log(name1+name2+name3)
-  }
 
   const eba1 = () => {
     return console.log(valueRef1.current.value) //on clicking button accesing current value of TextField and outputing it to console 
@@ -78,6 +74,7 @@ const eba3 = () => {
               }}
             />
            <Stack spacing={2} direction="row" justifyContent={"flex-end"} >
+           <Link to='/'>
              <Button variant="contained"
              onClick={
               ()=>fetch('http://localhost:8000/api/v1/products/', {
@@ -91,14 +88,7 @@ const eba3 = () => {
             }
              >Добавить</Button>
              
-             <Button
-            variant='contained'
-            color='primary'
-            size='small'
-            onClick={ohmlya}
-            >
-            Send
-            </Button>
+          </Link>
 
           </Stack>
     </div>

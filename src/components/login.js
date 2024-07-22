@@ -1,51 +1,42 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "./reglog.css"
+import "./regform.css"
+import {TextField, Typography, Button, Stack} from "@mui/material";
+import {Link} from "react-router-dom";
 
-function HorizontalExample() {
+
+const Login = () => {
 
   return (
    
-    <div className="Login">
-      <h1>Вход в личный кабинет</h1>
-    
-      <Form>
-      <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-        <Form.Label column sm={2}>
-          Логин
-        </Form.Label>
-        <Col sm={10}>
-          <Form.Control type="email" placeholder="Электронная почта" />
-        </Col>
-      </Form.Group>
+    <div className='container'>
+            <Typography variant="h2" fontFamily='Poppins' textAlign='center'>Войти на сайт</Typography>
+            <Typography variant="body1" marginBottom={3} fontFamily='Poppins' textAlign='center'>Введите логин и пароль</Typography>
+            <TextField
+                fullWidth={true}
+                margin='normal'
+                label="Username"
+                variant="outlined"
+                placeholder="Введите ваш username"
+            />
+            <TextField
+                type="password"
+                fullWidth={true}
+                margin='normal'
+                label="Password"
+                variant="outlined"
+                placeholder="Введите ваш пароль"
+            />
+           <Stack spacing={2} direction="row" justifyContent={"flex-end"} >
+            <Link to = '/'>
+             <Button variant="contained">Войти</Button>
+             </Link>
+             <Link to = '/registration'>
+             <Button variant="contained">Зарегистрироваться</Button>
+             </Link>
 
-      <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-        <Form.Label column sm={2}>
-          Пароль
-        </Form.Label>
-        <Col sm={10}>
-          <Form.Control type="password" placeholder="Пароль" />
-        </Col>
-      </Form.Group>
-      
-      <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
-        <Col sm={{ span: 10, offset: 2 }}>
-          <Form.Check label="Запомнить меня" />
-        </Col>
-      </Form.Group>
-
-      <Form.Group as={Row} className="mb-3">
-        <Col sm={{ span: 10, offset: 2 }}>
-          <Button type="submit">Войти</Button>
-        </Col>
-      </Form.Group>
-    </Form>
+          </Stack>
     </div>
   );
-}
+  };
 
-export default HorizontalExample;
+export default Login;

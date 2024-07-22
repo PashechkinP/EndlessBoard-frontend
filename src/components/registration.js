@@ -1,15 +1,9 @@
 import React from 'react';
 import "./regform.css"
-import {TextField, Typography, Radio, RadioGroup, FormControl, FormControlLabel, 
-FormLabel, Button, Stack} from "@mui/material";
-import { MuiFileInput } from 'mui-file-input';
+import {TextField, Typography, Button, Stack} from "@mui/material";
 
 const Registration = () => {
-  const [file, setFile] = React.useState(null)
 
-  const handleChange = (newFile) => {
-    setFile(newFile)
-  }
 
   return (
     <div className='container'>
@@ -18,23 +12,9 @@ const Registration = () => {
             <TextField
                 fullWidth={true}
                 margin='normal'
-                label="Имя"
-                variant="outlined"
-                placeholder="Введите ваше имя"
-            />
-            <TextField
-                fullWidth={true}
-                margin='normal'
                 label="Username"
                 variant="outlined"
                 placeholder="Введите ваш username"
-            />
-            <TextField
-                fullWidth={true}
-                margin='normal'
-                label="Email"
-                variant="outlined"
-                placeholder="Введите ваш email"
             />
             <TextField
                 type="password"
@@ -52,27 +32,6 @@ const Registration = () => {
                 variant="outlined"
                 placeholder="Повторите ваш пароль"
             />
-            <MuiFileInput 
-             fullWidth={true}
-             margin='normal'
-            value={file} 
-            label="Добавьте фото"
-            onChange={handleChange} />
-            <FormControl>
-             <FormLabel id="demo-radio-buttons-group-label">Укажите пол</FormLabel>
-             <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              name="radio-buttons-group" >
-            <FormControlLabel 
-            value="female" 
-            control={<Radio />} 
-            label="Женский" />
-            <FormControlLabel 
-            value="male" 
-            control={<Radio />} label="Мужской" />
-            </RadioGroup>
-           </FormControl>
            <Stack spacing={2} direction="row" justifyContent={"flex-end"} >
              <Button variant="contained">Регистрация</Button>
           </Stack>

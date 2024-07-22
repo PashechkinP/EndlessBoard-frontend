@@ -18,7 +18,6 @@ import InfinitySymb from './InfinitySymb';
 import { Link } from 'react-router-dom'
 import Registration from './registration';
 
-
 const settings = ['My posts', 'Account', 'Logout'];
 
 const Search = styled('div')(({ theme }) => ({
@@ -66,11 +65,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function HeaderAuth() {
 
   const [msg, setMsg] = useState('');  // msg - поисковый запрос для отправки на сервер
-
   const [searchInput, setSearchInput] = useState('');  // searchInput - temporary хранит строку с данными запроса
   const handleTextInputChange = event => {
     setSearchInput(event.target.value);
   };
+
+
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -123,8 +123,8 @@ function HeaderAuth() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Link to='/registration'>
-            <Button variant="contained"> Зарегистрироваться </Button>
+          <Link to='/login'>
+            <Button variant="contained"> Войти </Button>
           </Link>
           <Link to='/new'>
             <Button variant="contained"> Создать </Button>
