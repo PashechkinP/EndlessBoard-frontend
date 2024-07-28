@@ -4,14 +4,14 @@ import Header from './Header.js';
 import AdCard from './adCard.js';
 import Grid from '@mui/material/Grid';
 import { useEffect } from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 
 function HomePage() {
 
 
     const [showPosts, setShowPosts] = useState([]);
-    const [offset, setOffset] = useState(0);              // переменная для смещения подгрузки новых постов
+    const [offset, setOffset] = useState(0);    // переменная для смещения подгрузки новых постов
     document.addEventListener("scroll", scrollListener);
 
     useEffect(() => {  // то что должно сделаться при первом запуске так как указано []
@@ -38,14 +38,14 @@ function HomePage() {
       //   setOffset(offset + 25)
       // }
     }
-    const showingPosts = showPosts.map((product) => <Grid item key={product.id}><AdCard adTitle={product.name} adText={product.description} adId={product.id} key={product.id} post_id={product.id}></AdCard></Grid>); // id обязательно надо для reacta
+   
+    const showingPosts = showPosts.map((product) => <Grid item key={product.id}><AdCard adTitle={product.name} adText={product.description} adId={product.id} key={product.id} imgLink={product.price} post_id={product.id}></AdCard></Grid>); // id обязательно надо для reacta
 
     return (
 
         <div>
 
             <Header isLoggedIn={true} />
-            
             <Grid container justifyContent="center" spacing={5} marginTop={1}>
 
                 {showingPosts}

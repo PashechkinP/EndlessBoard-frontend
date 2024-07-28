@@ -12,7 +12,7 @@ export default function AdCard({ imgLink, adTitle, adText, adId, post_id }) {
 
   const [name2, setName2] = useState(adText);
   const [name1, setName1] = useState(adTitle);
-  const [name3, setName3] = useState("");
+  const [name3, setName3] = useState(imgLink);
 
 
   const valueRef1 = useRef('');
@@ -28,7 +28,7 @@ export default function AdCard({ imgLink, adTitle, adText, adId, post_id }) {
           component="img"
           height="300rem"
           image={imgLink}
-          alt="green iguana"
+          alt="нет изображения"
         />
         <CardContent>
           {redact ? 
@@ -92,12 +92,10 @@ export default function AdCard({ imgLink, adTitle, adText, adId, post_id }) {
               .catch(error => console.error('Ошибка:', error))
             }>Сохранить</Button> :
           <Button size="small" color="primary" onClick={function handleClick() { setRedact(true) }}>Редактировать</Button>}
-
         <Button size="small" color="primary" onClick={
           () => fetch(`http://localhost:8000/api/v1/products/${adId}/del`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
-
           })
             .then(() => window.location.reload())
             .then(res => res.json())

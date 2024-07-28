@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import "./regform.css"
 import {TextField, Typography, Button, Stack} from "@mui/material";
 import {Link} from "react-router-dom";
 import { useEffect } from 'react';
 import { SmartButtonOutlined } from '@mui/icons-material';
+import { AuthContext } from './AuthContext';
 
 
-function Login() {
 
-  
+function Login({auth}) {
+
 
   const [showUsers, setShowUsers] = useState([]);
   const [offset, setOffset] = useState(0);   
-  const [finduser, setFinduser] = useState('');
+  const [finduser, setFinduser] = useState('');  
+
 
   // переменная для смещения подгрузки новых постов
   document.addEventListener("scroll", scrollListener);
@@ -45,17 +47,28 @@ function Login() {
   showUsers.map((userki) => <li>{userki.userokname} {userki.userokpass}</li>); // id обязательно надо для reacta
 
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [isAuth, SetIsAuth] = useState(false);
   const [Name, SetName] = useState("");
-  const [Password, SetPassword] = useState ("")
+  const [Password, SetPassword] = useState ("");
+   
   const handleFilter = (event)=>{
     const value = event.target.value;
-    const filtered = showUsers.filter(user=>SetName(user.userokname.includes(`${finduser}`)));
+    const filtered = showUsers.filter(user=>user.userokname.includes(`${finduser}`));
     setFilteredUsers(filtered);
+    console.log(filtered); //мб можно использовать уже существующий showUsers[]
+    console.log(filtered[0].userokname);
+    console.log(filtered[0].userokpass);
+
+    if (filtered[0].userokname === finduser && filtered[0].userokpass === Password) {
+      auth(true);
+      // document.location.href='http://localhost:3000/';
+    }
+    else{
+      console.log('Sasai')  // хорошо бы норм вывод об ошибке сделать
+    }
   }
   
   return (  
-   
+   // Перенести функционал на кнопку "войти", убрать лишнее поле, замутить авторизацию на удаление
     <div className='container'>      
             <Typography variant="h2" fontFamily='Poppins' textAlign='center'></Typography>
             <Typography variant="body1" marginBottom={3} fontFamily='Poppins' textAlign='center'>Введите логин и пароль</Typography>
@@ -69,31 +82,27 @@ function Login() {
                 onChange={(e) => {
                 setFinduser(e.target.value);}}
             />
-                <Button onClick={handleFilter}> ПОКАЗАТЬ </Button>
-                <Typography>{filteredUsers.map(user => (<div>{user.userokname}</div>))}</Typography>
-                <TextField
-                fullWidth={true}
-                value={Name}
-                margin='normal'
-                label="Username"
-                variant="outlined"
-                placeholder="Введите ваш username"
-            />
+                
+            
             <TextField
                 type="password"
                 fullWidth={true}
                 margin='normal'
+                value={Password}
                 label="Password"
                 variant="outlined"
                 placeholder="Введите ваш пароль"
+                onChange={(e) => {
+                SetPassword(e.target.value);}}
             />
            <Stack spacing={2} direction="row" justifyContent={"flex-end"} >
-            <Link to = '/'>
-             <Button variant="contained">Войти</Button>
-             </Link>
-             <Link to = '/registration'>
-             <Button variant="contained">Зарегистрироваться</Button>
-             </Link>
+           <Link to='/'>
+           <Button variant="contained" onClick={handleFilter}>Войти</Button>
+          </Link>          
+            <Link to='/registration'>
+            <Button variant="contained"> Зарегистрироваться </Button>
+          </Link>
+             
 
           </Stack>
     </div>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,6 +17,8 @@ import InputBase from '@mui/material/InputBase';
 import InfinitySymb from './InfinitySymb';
 import { Link } from 'react-router-dom'
 import Registration from './registration';
+import { AuthContext } from './AuthContext';
+import { useCol } from 'react-bootstrap/esm/Col';
 
 const settings = ['My posts', 'Account', 'Logout'];
 
@@ -64,6 +66,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function HeaderAuth() {
 
+const auth = useContext(AuthContext);
+
+const [auf, setAuth] = useState(localStorage.getItem('auf'));
   const [msg, setMsg] = useState('');  // msg - поисковый запрос для отправки на сервер
   const [searchInput, setSearchInput] = useState('');  // searchInput - temporary хранит строку с данными запроса
   const handleTextInputChange = event => {
@@ -123,13 +128,19 @@ function HeaderAuth() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Link to='/login'>
+          { auth ? 
+            <Link to='/new'>
+            <Button variant="contained"> Создать </Button>
+            <Button variant="contained"> Выйти </Button>
+          </Link>          
+          :
+            <Link to='/login'>
             <Button variant="contained"> Войти </Button>
           </Link>
-          <Link to='/new'>
-            <Button variant="contained"> Создать </Button>
-          </Link>
+          }
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

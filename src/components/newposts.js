@@ -66,13 +66,17 @@ const eba3 = () => {
                 fullWidth={true}
                 value={name3}
                 margin='normal'
-                label="Price"
+                label="href on img omg"
                 variant="outlined"
-                placeholder="Введите price"
+                placeholder="Введите ссылку на картинку"
                 onChange={(e) => {
                   setName3(e.target.value);
-              }}
-            />
+              }}>
+                
+              </TextField>
+              <img
+              src={name3}
+              height="200"/>
            <Stack spacing={2} direction="row" justifyContent={"flex-end"} >
            <Link to='/'>
              <Button variant="contained"
