@@ -1,38 +1,19 @@
 import React from 'react';
 import { useRef, Component } from 'react'
 import "./newposts.css"
-import {TextField, Typography, Radio, RadioGroup, FormControl, FormControlLabel, 
-FormLabel, Button, Stack} from "@mui/material";
-import { MuiFileInput } from 'mui-file-input';
+import {TextField, Typography, Button, Stack} from "@mui/material";
 import { useState } from "react";
 import {Link} from "react-router-dom";
 const NewPosts = () => {
-  // const [file, setFile] = React.useState(null)
+
   const [name1, setName1] = useState("");
   const [name2, setName2] = useState("");
   const [name3, setName3] = useState("");
 
-  // const handleChange = (newFile) => {
-  //   setFile(newFile)
-  // }
-
-  const eba1 = () => {
-    return console.log(valueRef1.current.value) //on clicking button accesing current value of TextField and outputing it to console 
-}
-const eba2 = () => {
-  return console.log(valueRef2.current.value)
-}
-const eba3 = () => {
-  return console.log(valueRef3.current.value)
-}
-
   const valueRef1 = useRef('');
   const valueRef2 = useRef('');
   const valueRef3 = useRef('');
-  // var params = new FormData(); 
-  // params.set('name', {eba1});
-  // params.set('description', {eba2});
-  // params.set('price', {eba3});
+
   return (
     
     <div className='container'>

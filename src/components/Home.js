@@ -5,9 +5,11 @@ import AdCard from './adCard.js';
 import Grid from '@mui/material/Grid';
 import { useEffect } from 'react';
 import { Button, Typography } from '@mui/material';
+import HeaderAuth from './HeaderAuth.js';
+import { AuthContext } from './AuthContext.js';
 
 
-function HomePage() {
+function HomePage({auth}) {
 
 
     const [showPosts, setShowPosts] = useState([]);
@@ -45,7 +47,7 @@ function HomePage() {
 
         <div>
 
-            <Header isLoggedIn={true} />
+            <HeaderAuth auth2={(val)=>{auth(val)}}/>
             <Grid container justifyContent="center" spacing={5} marginTop={1}>
 
                 {showingPosts}

@@ -15,12 +15,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import InfinitySymb from './InfinitySymb';
-import { Link } from 'react-router-dom'
-import Registration from './registration';
+import { Link } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
-import { useCol } from 'react-bootstrap/esm/Col';
 
-const settings = ['My posts', 'Account', 'Logout'];
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -64,11 +61,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 
-function HeaderAuth() {
+function HeaderAuth({auth2}) {
 
-const auth = useContext(AuthContext);
+const authUser = useContext(AuthContext);
 
-const [auf, setAuth] = useState(localStorage.getItem('auf'));
   const [msg, setMsg] = useState('');  // msg - поисковый запрос для отправки на сервер
   const [searchInput, setSearchInput] = useState('');  // searchInput - temporary хранит строку с данными запроса
   const handleTextInputChange = event => {
@@ -81,16 +77,11 @@ const [auf, setAuth] = useState(localStorage.getItem('auf'));
     if (event.key === 'Enter') {
       setMsg(searchInput);
     }
-  };
+  }; 
 
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleClick = () => {
+    auth2(false);
   };
 
   return (
@@ -128,11 +119,12 @@ const [auf, setAuth] = useState(localStorage.getItem('auf'));
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          { auth ? 
+          { authUser ? 
+          <div>
             <Link to='/new'>
             <Button variant="contained"> Создать </Button>
-            <Button variant="contained"> Выйти </Button>
-          </Link>          
+          </Link> 
+            <Button variant="contained"onClick={handleClick}> Выйти </Button> </div>         
           :
             <Link to='/login'>
             <Button variant="contained"> Войти </Button>
@@ -140,38 +132,8 @@ const [auf, setAuth] = useState(localStorage.getItem('auf'));
           }
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
         </Toolbar>
       </Container>
     </AppBar>

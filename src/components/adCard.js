@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { useState, useRef } from 'react';
 import {Button, CardActionArea, CardActions, TextField} from '@mui/material';
+import { Link } from 'react-router-dom';
 import "./regform.css"
 
 export default function AdCard({ imgLink, adTitle, adText, adId, post_id }) {
@@ -79,6 +80,7 @@ export default function AdCard({ imgLink, adTitle, adText, adId, post_id }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
+      <Link to='/'>   
         {redact ? <Button size="small" color="primary" onClick={
               ()=>fetch(`http://localhost:8000/api/v1/products/${post_id}/put`, {
                 method: 'PUT',
@@ -88,7 +90,6 @@ export default function AdCard({ imgLink, adTitle, adText, adId, post_id }) {
               .then(res => res.json())
               .then(data => console.log('Успешно:', data))
               .then(setRedact(false))
-              .then(() => window.location.reload())
               .catch(error => console.error('Ошибка:', error))
             }>Сохранить</Button> :
           <Button size="small" color="primary" onClick={function handleClick() { setRedact(true) }}>Редактировать</Button>}
@@ -97,11 +98,11 @@ export default function AdCard({ imgLink, adTitle, adText, adId, post_id }) {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
           })
-            .then(() => window.location.reload())
             .then(res => res.json())
             .then(data => console.log('Успешно:', data))
             .catch(error => console.error('Ошибка:', error))
         }>Удалить</Button>
+      </Link>  
       </CardActions>
     </Card>
 

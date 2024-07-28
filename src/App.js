@@ -17,7 +17,7 @@ const [isAuth, setIsAuth] = useState(false);
       <div className="App">
         <AuthContext.Provider value={isAuth}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage auth={(val)=>{setIsAuth(val)}} />} />
           <Route
             path="/registration"
             element={<Registration />}
